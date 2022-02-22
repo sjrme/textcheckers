@@ -1,0 +1,45 @@
+73
+To pass function to a method, as in c++, would need to create a parent class with different child classes, and have
+method take a the parent class as parameter.
+
+If lots of conditions for something to be true, you can list them instead of nesting them to make it easier to read.
+See hasJump(). This also has to do with checking for specific conditions first, and doing general catch all "everything
+else" last.
+//Not really specific per se. What conditions are relevant to the highest number of paths? This goes first.
+Red piece
+Black Piece
+Red King
+Black king
+Is it a king? is relevant to all paths. Is it red or black? is relevant to red piece and black piece only. So, if check
+for king/piece first, you won't have to check it again later. If asked at the end, in actuallity you will have checked
+if it was king for all four paths.
+
+
+Specifiying last else if when not necessary to make it easier to read.
+
+Errors fixed:
+    Check for win after jump not done, made it so did not force jump.
+    Added king graphics, made model return pieces not piecetypes to accomodate
+    Didn't change turn on finalize move
+    Checking for any jump checked for edge moves, but, edge jumps were not checked for when checking specific move.
+    Checking for for edge jump on general moves did not subtract beginning from end when comparing to 8
+    Reset flag and switch turn if king is made
+    Jumps were checked for kings on king row in both directions, even though one direction falls off board. Null exception.
+    Pieces didn't move king type with move, king type stayed where it was
+    King could jump but not move backwards
+    Kings moves did not check for null on edges
+    Order of lines made for no king change if piece walks in to king row instead of jumps in
+    NullException if bad input given on moving edge
+    
+    Changes 7/19
+    
+    Made HasJump take a set of vacatedsquares, judge jump on next move based on this
+    Moved checkWin to finalize methods
+    moved has jump to finalize methods, out of checkwin. Was unintutive and resulted in a bug.
+    	This made finalize move actually a finalization. Allowed me to separate "hasJUmp" from checkWin, in an intuitive location. 
+    With checkfor a jump and check win in finalize methods, used finalize methods to create set to pass into hasJump
+    Created a new member vacatedSquares for jumps that last more than one turn
+    
+Things I don't like:
+	Excess number of members. 
+	Forced JUmp and forced jump location seperation. This could be fixed now that hasJump is in finalizeJump. Both flags are set next to each other. 
